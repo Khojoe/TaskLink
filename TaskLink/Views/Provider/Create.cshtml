@@ -1,0 +1,69 @@
+@model TaskLink.Models.ProviderProfile
+@{
+    ViewData["Title"] = "Complete Your Profile";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-7 col-lg-6">
+            <div class="card border-0 shadow">
+                <div class="card-body p-4">
+                    <h4 class="fw-bold mb-1">Complete Your Provider Profile</h4>
+                    <p class="text-muted small mb-4">This is what customers will see when they search for you.</p>
+
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger small"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Trade" class="form-label fw-semibold"></label>
+                            <select asp-for="Trade" class="form-select">
+                                <option value="">— Select your trade —</option>
+                                @foreach (var t in new[] { "Electrician","Carpenter","Mechanic","Plumber","Phone Repair","Appliance Repair","Mason","Painter","Welder","Other" })
+                                {
+                                    <option value="@t">@t</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Trade" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Bio" class="form-label fw-semibold"></label>
+                            <textarea asp-for="Bio" class="form-control" rows="4"
+                                      placeholder="Describe your skills, experience, and what makes you stand out..."></textarea>
+                            <span asp-validation-for="Bio" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="PhoneNumber" class="form-label fw-semibold"></label>
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="+233 XX XXX XXXX" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Location" class="form-label fw-semibold"></label>
+                            <input asp-for="Location" class="form-control" placeholder="e.g. Accra, Kumasi, Tema" />
+                            <span asp-validation-for="Location" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="YearsOfExperience" class="form-label fw-semibold"></label>
+                            <input asp-for="YearsOfExperience" type="number" class="form-control" min="0" max="60" />
+                            <span asp-validation-for="YearsOfExperience" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4 form-check">
+                            <input asp-for="IsAvailable" class="form-check-input" />
+                            <label asp-for="IsAvailable" class="form-check-label">I am currently available for work</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 fw-semibold">Save Profile</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

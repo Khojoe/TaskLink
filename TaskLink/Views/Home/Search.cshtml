@@ -1,0 +1,85 @@
+@model TaskLink.Models.SearchViewModel
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<div class="bg-light py-4 border-bottom mb-4">
+    <div class="container">
+        <form asp-controller="Home" asp-action="Search" method="get" class="row g-2 align-items-center">
+            <div class="col-12 col-md-5">
+                <input type="text" name="query" value="@Model.Query" class="form-control"
+                       placeholder="Trade or service (e.g. electrician)" />
+            </div>
+            <div class="col-12 col-md-4">
+                <input type="text" name="location" value="@Model.Location" class="form-control"
+                       placeholder="Location" />
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i> Search
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold mb-0">
+            @if (!string.IsNullOrWhiteSpace(Model.Query))
+            {
+                <span>Results for "<span class="text-primary">@Model.Query</span>"</span>
+            }
+            else
+            {
+                <span>All Available Providers</span>
+            }
+        </h5>
+        <span class="text-muted small">@Model.Results.Count found</span>
+    </div>
+
+    @if (!Model.Results.Any())
+    {
+        <div class="text-center py-5 text-muted">
+            <i class="bi bi-person-x fs-1 mb-3 d-block"></i>
+            <p>No providers found. Try a different search term or location.</p>
+            <a asp-controller="Home" asp-action="Search" class="btn btn-outline-primary btn-sm">View All Providers</a>
+        </div>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var p in Model.Results)
+            {
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm provider-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="avatar-circle me-3">
+                                    @(p.User?.FullName?.Substring(0, 1).ToUpper() ?? "?")
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">@p.User?.FullName</h6>
+                                    <span class="badge bg-primary-subtle text-primary">@p.Trade</span>
+                                </div>
+                            </div>
+                            <p class="text-muted small mb-2">
+                                <i class="bi bi-geo-alt me-1"></i>@p.Location
+                            </p>
+                            <p class="text-muted small mb-3">
+                                <i class="bi bi-briefcase me-1"></i>@p.YearsOfExperience yrs experience
+                            </p>
+                            <p class="small text-truncate-2 mb-3">@p.Bio</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 pt-0">
+                            <a asp-controller="Home" asp-action="ProviderDetail" asp-route-id="@p.Id"
+                               class="btn btn-outline-primary btn-sm w-100">
+                                View Profile & Contact
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

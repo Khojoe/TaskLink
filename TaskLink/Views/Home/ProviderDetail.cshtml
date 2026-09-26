@@ -1,0 +1,78 @@
+@model TaskLink.Models.ProviderProfile
+@{
+    ViewData["Title"] = Model.User?.FullName ?? "Provider Profile";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <a asp-controller="Home" asp-action="Search" class="btn btn-link text-decoration-none text-muted mb-3 ps-0">
+                <i class="bi bi-arrow-left me-1"></i> Back to results
+            </a>
+
+            <div class="card border-0 shadow">
+                <div class="card-body p-4">
+                    <!-- Header -->
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="avatar-circle avatar-lg me-3">
+                            @(Model.User?.FullName?.Substring(0, 1).ToUpper() ?? "?")
+                        </div>
+                        <div>
+                            <h4 class="fw-bold mb-1">@Model.User?.FullName</h4>
+                            <span class="badge bg-primary fs-6 px-3">@Model.Trade</span>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <!-- Details -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-6">
+                            <p class="text-muted small mb-0">Location</p>
+                            <p class="fw-semibold"><i class="bi bi-geo-alt text-primary me-1"></i>@Model.Location</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="text-muted small mb-0">Experience</p>
+                            <p class="fw-semibold"><i class="bi bi-briefcase text-primary me-1"></i>@Model.YearsOfExperience years</p>
+                        </div>
+                        <div class="col-12">
+                            <p class="text-muted small mb-0">Availability</p>
+                            @if (Model.IsAvailable)
+                            {
+                                <span class="badge bg-success-subtle text-success">
+                                    <i class="bi bi-check-circle me-1"></i>Available
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger-subtle text-danger">
+                                    <i class="bi bi-x-circle me-1"></i>Unavailable
+                                </span>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Bio -->
+                    <div class="mb-4">
+                        <h6 class="fw-bold text-muted text-uppercase small mb-2">About</h6>
+                        <p>@Model.Bio</p>
+                    </div>
+
+                    <hr />
+
+                    <!-- Contact -->
+                    <h6 class="fw-bold text-muted text-uppercase small mb-3">Contact</h6>
+                    <div class="d-grid gap-2">
+                        <a href="tel:@Model.PhoneNumber" class="btn btn-primary btn-lg">
+                            <i class="bi bi-telephone-fill me-2"></i>Call @Model.PhoneNumber
+                        </a>
+                        <a href="https://wa.me/@(Model.PhoneNumber.Replace("+","").Replace(" ",""))"
+                           target="_blank" class="btn btn-success">
+                            <i class="bi bi-whatsapp me-2"></i>WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

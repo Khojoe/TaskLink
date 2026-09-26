@@ -1,0 +1,96 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Hero -->
+<section class="hero-section text-white text-center py-5">
+    <div class="container py-4">
+        <h1 class="display-4 fw-bold mb-3">Find Trusted Artisans Near You</h1>
+        <p class="lead mb-4">Electricians, carpenters, mechanics and more — browse verified profiles and connect instantly.</p>
+        <form asp-controller="Home" asp-action="Search" method="get" class="row g-2 justify-content-center">
+            <div class="col-12 col-md-4">
+                <input type="text" name="query" class="form-control form-control-lg"
+                       placeholder="What do you need? (e.g. electrician)" />
+            </div>
+            <div class="col-12 col-md-3">
+                <input type="text" name="location" class="form-control form-control-lg"
+                       placeholder="Location (e.g. Accra)" />
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-warning btn-lg fw-semibold px-4">
+                    <i class="bi bi-search me-1"></i> Search
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- Categories -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-4">Browse by Trade</h2>
+        <div class="row g-3 justify-content-center">
+            @foreach (var (icon, label) in new[] {
+                ("bi-lightning-charge-fill", "Electrician"),
+                ("bi-hammer", "Carpenter"),
+                ("bi-wrench-adjustable", "Mechanic"),
+                ("bi-droplet-fill", "Plumber"),
+                ("bi-phone", "Phone Repair"),
+                ("bi-fan", "Appliance Repair")
+            })
+            {
+                <div class="col-6 col-sm-4 col-md-2">
+                    <a asp-controller="Home" asp-action="Search" asp-route-query="@label"
+                       class="card text-center py-3 text-decoration-none category-card h-100 border-0 shadow-sm">
+                        <i class="bi @icon fs-1 text-primary mb-2"></i>
+                        <span class="fw-semibold text-dark small">@label</span>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- How it works -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-4">How TaskLink Works</h2>
+        <div class="row g-4 text-center">
+            <div class="col-md-4">
+                <div class="p-3">
+                    <i class="bi bi-search-heart fs-1 text-primary mb-3 d-block"></i>
+                    <h5 class="fw-bold">Search</h5>
+                    <p class="text-muted">Type what you need and where you are. Browse a list of available artisans.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3">
+                    <i class="bi bi-person-badge fs-1 text-primary mb-3 d-block"></i>
+                    <h5 class="fw-bold">Review Profile</h5>
+                    <p class="text-muted">Check their trade, experience, location, and bio before reaching out.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3">
+                    <i class="bi bi-telephone-forward fs-1 text-primary mb-3 d-block"></i>
+                    <h5 class="fw-bold">Connect</h5>
+                    <p class="text-muted">Get their contact directly and arrange the job on your terms.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+@if (!User.Identity!.IsAuthenticated)
+{
+    <section class="bg-primary text-white text-center py-5">
+        <div class="container">
+            <h3 class="fw-bold mb-2">Are you a skilled artisan?</h3>
+            <p class="mb-4">Sign up and reach hundreds of customers looking for your skills today.</p>
+            <a asp-controller="Account" asp-action="Register" class="btn btn-warning btn-lg fw-semibold px-5">
+                Join as a Provider
+            </a>
+        </div>
+    </section>
+}
