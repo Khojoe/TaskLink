@@ -80,7 +80,7 @@ TaskLink/
 
 ---
 
-## Team - DCIT 301 Group
+## Team - DCIT 318 Group
 
 | Name | Index Number | Role |
 |---|---|---|
