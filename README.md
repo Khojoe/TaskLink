@@ -2,7 +2,7 @@
 
 A home-services marketplace connecting customers with skilled artisans (electricians, carpenters, mechanics, plumbers, and more).
 
-Built with **ASP.NET Core 8 MVC**, **Entity Framework Core**, and **SQL Server** as part of the CIT 301 — Internet Programming II semester project at the University of Ghana.
+Built with **ASP.NET Core 8 MVC**, **Entity Framework Core**, and **SQL Server** as part of the DCIT 318 — Internet Programming II semester project at the University of Ghana.
 
 ---
 
