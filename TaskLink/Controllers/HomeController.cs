@@ -29,7 +29,7 @@ namespace TaskLink.Controllers
                 results = results.Where(p => p.Trade.ToLower().Contains(query.ToLower()));
 
             if (!string.IsNullOrWhiteSpace(location))
-                results = results.Where(p => p.Location.ToLower().Contains(location.ToLower()));
+                    results = results.Where(p => p.Location.ToLower().Contains(location.ToLower()));
 
             var vm = new SearchViewModel
             {
