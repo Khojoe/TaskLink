@@ -6,7 +6,6 @@ namespace TaskLink.Models
     {
         public int Id { get; set; }
 
-        [Required]
         public string UserId { get; set; } = string.Empty;
         public ApplicationUser? User { get; set; }
 
@@ -17,7 +16,7 @@ namespace TaskLink.Models
         [StringLength(500)]
         public string Bio { get; set; } = string.Empty;
 
-        [Required, Phone, Display(Name = "Phone Number")]
+        [Required, Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; } = string.Empty;
 
         [Required, Display(Name = "Location (City / Area)")]

@@ -50,10 +50,14 @@
                         </li>
                     </ul>
 
-                    <a asp-controller="Home" asp-action="ProviderDetail" asp-route-id="@Model.Id"
-                       class="btn btn-outline-primary w-100">
-                        <i class="bi bi-eye me-1"></i> Preview Public Profile
-                    </a>
+                    <a asp-controller="Provider" asp-action="Edit"
+   class="btn btn-primary w-100 mb-2">
+    <i class="bi bi-pencil me-1"></i> Edit Profile
+</a>
+<a asp-controller="Home" asp-action="ProviderDetail" asp-route-id="@Model.Id"
+   class="btn btn-outline-primary w-100">
+    <i class="bi bi-eye me-1"></i> Preview Public Profile
+</a>
                 </div>
             </div>
         </div>
